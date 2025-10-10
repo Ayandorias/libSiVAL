@@ -153,10 +153,9 @@ enum class ErrorCode {
     OutOfRange
 };
 
-enum class RESPONSE_TYPE {
-    RES_FREQ = 0,
-    RES_IMP,
-    RES_CON
+enum class ResponseType {
+    Spl = 0,
+    Impedance
 };
 
 
@@ -189,6 +188,18 @@ inline std::string roleToString(DriverRole role) {
 
     auto it = roleMap.find(role);
     if (it != roleMap.end()) {
+        return it->second;
+    }
+    return "unknown";
+}
+
+inline std::string typeToString(ResponseType type) {
+    static const std::map<ResponseType, std::string> typeMap = {
+        {ResponseType::Spl, "Spl"}
+    };
+
+    auto it = typeMap.find(type);
+    if (it != typeMap.end()) {
         return it->second;
     }
     return "unknown";

@@ -32,11 +32,19 @@
 //// end static functions
 
 //// begin public member methods
-SiVAL::AbstractResponse::AbstractResponse() {
+SiVAL::AbstractResponse::AbstractResponse(ResponseType type)
+    : m_type(type) {
 }
 
 SiVAL::AbstractResponse::~AbstractResponse() {
 }
+void SiVAL::AbstractResponse::setSpeaker(std::shared_ptr<const SiVAL::AbstractDriver> speaker) {
+    m_speaker = speaker;
+}
+void SiVAL::AbstractResponse::setEnclosure(std::shared_ptr<const SiVAL::AbstractEnclosure> enclosure) {
+    m_enclosure = enclosure;
+}
+
 //// end public member methods
 
 //// begin public member methods (internal use only)

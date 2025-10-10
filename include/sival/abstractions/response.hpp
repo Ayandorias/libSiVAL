@@ -15,6 +15,7 @@
 //// begin project specific includes
 #include <sival/abstractions/enclosure.hpp>
 #include <sival/abstractions/driver.hpp>
+#include <sival/sival.hpp>
 //// end project specific includes
 
 //// begin using namespaces
@@ -42,7 +43,7 @@ class AbstractResponse
     //// begin public member methods
 public:
     /// Constructor
-    explicit AbstractResponse();
+    explicit AbstractResponse(ResponseType type);
     /// Destructor
     virtual ~AbstractResponse();
 
@@ -50,17 +51,14 @@ public:
      * @brief Sets or updates the AbstractDriver component of the system.
      * @param speaker A pointer to a constant AbstractDriver object.
      */
-    void setSpeaker(std::shared_ptr<const SiVAL::AbstractDriver> speaker) {
-        m_speaker = speaker;
-    }
+    void setSpeaker(std::shared_ptr<const SiVAL::AbstractDriver> speaker);
 
     /**
      * @brief Sets or updates the AbstractEnclosure component of the system.
      * @param enclosure A pointer to a constant AbstractEnclosure object.
      */
-    void setEnclosure(std::shared_ptr<const SiVAL::AbstractEnclosure> enclosure) {
-        m_enclosure = enclosure;
-    }
+    void setEnclosure(std::shared_ptr<const SiVAL::AbstractEnclosure> enclosure);
+    ResponseType type();
     //// end public member methods
 
     //// begin public member methods (internal use only)
@@ -87,6 +85,7 @@ public:
 
     //// begin protected member
 protected:
+    ResponseType m_type;
     //// end protected member
 
     //// begin private member

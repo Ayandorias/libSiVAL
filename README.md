@@ -1,5 +1,3 @@
-# libSiVAL
-
 <img src="doc/resource/logo_big.svg" alt="SiVAL Logo" width="auto" height="150">
 
 ![License](https://img.shields.io/badge/License-LGPL_v3-blue.svg)

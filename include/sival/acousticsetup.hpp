@@ -42,12 +42,14 @@ public:
     AcousticSetup(const std::string &json);
     ~AcousticSetup();
     bool addDriver(SiVAL::DriverRole role, const std::string &json, int count);
-    // void addResponse(std::unique_ptr<AbstractResponse> response);
-    RoleConfig* driver(SiVAL::DriverRole role);
+    bool addResponse(std::unique_ptr<AbstractResponse> response);
+    RoleConfig* driverByRole(SiVAL::DriverRole role);
     SiVAL::AbstractEnclosure& enclosure();
     void removeDriver(SiVAL::DriverRole role);
-    // AbstractResponse* responseByType(SiVAL::RESPONSE_TYPE type);
+    void removeResponse(SiVAL::ResponseType type);
+    AbstractResponse* responseByType(SiVAL::ResponseType type);
     void setDriver(SiVAL::DriverRole role, const std::string &json, int count);
+    void setResponse(SiVAL::ResponseType type, std::unique_ptr<AbstractResponse> respopnse);
     std::string toJson();
     //// end public member methods
 
@@ -79,7 +81,7 @@ protected:
 private:
     std::map<DriverRole, std::unique_ptr<RoleConfig>> m_drivers;
     std::unique_ptr<SiVAL::AbstractEnclosure> m_enclosure;
-    std::vector<std::unique_ptr<AbstractResponse>> m_responses;
+    std::map<ResponseType, std::unique_ptr<AbstractResponse>> m_responses;
     //// end private member
 };
 }

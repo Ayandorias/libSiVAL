@@ -50,34 +50,50 @@ bool AcousticSetup::addDriver(SiVAL::DriverRole role, const std::string &json, i
     std::pair result = m_drivers.emplace(role, std::move(rc));
     return result.second;
 }
-// void AcousticSetup::addResponse(std::unique_ptr<SiVAL::AbstractResponse> response) {
-//     // if(response) {
-//     //     if(!response->speaker) response->setSpeaker(*m_speaker);
-//     //     if(!response->enclosure) response->setEnclosure(*m_enclosure);
-//     //     m_responses.push_back(std::move(response));
-//     // }
-// }
-RoleConfig* AcousticSetup::driver(SiVAL::DriverRole role) {
-    return nullptr;
+bool AcousticSetup::addResponse(std::unique_ptr<SiVAL::AbstractResponse> response) {
+    std::pair result = m_responses.emplace(response->type(), std::move(response));
+    return result.second;
+}
+RoleConfig* AcousticSetup::driverByRole(SiVAL::DriverRole role) {
+    auto it = m_drivers.find(role);
+
+    if (it != m_drivers.end()) {
+        // .get() on the unique_ptr returns the raw pointer
+        return it->second.get();
+    }
+
+    return nullptr; // Not found
 }
 AbstractEnclosure& AcousticSetup::enclosure() {
     return *m_enclosure;
 }
 void SiVAL::AcousticSetup::removeDriver(SiVAL::DriverRole role) {
     if(m_drivers.erase(role) == 0) {
-        throw SiVAL::Exceptions::OutOfRange("There is driver with the role: " + SiVAL::roleToString(role));
+        throw SiVAL::Exceptions::OutOfRange("There is no driver with the role: " + SiVAL::roleToString(role));
     }
 }
-// AbstractResponse* SiVAL::AcousticSetup::responseByType(SiVAL::RESPONSE_TYPE type) {
-//     // for(const auto& r : m_responses) {
-//     //     if(r->type() == type) return r.get();
-//     // }
-//     return nullptr;
-// }
+void SiVAL::AcousticSetup::removeResponse(SiVAL::ResponseType type) {
+    if(m_responses.erase(type) == 0) {
+        throw SiVAL::Exceptions::OutOfRange("There is no response with type: " + SiVAL::typeToString(type));
+    }
+}
+AbstractResponse* SiVAL::AcousticSetup::responseByType(SiVAL::ResponseType type) {
+    auto it = m_responses.find(type);
+
+    if (it != m_responses.end()) {
+        // .get() on the unique_ptr returns the raw pointer
+        return it->second.get();
+    }
+
+    return nullptr; // Not found
+}
 
 void AcousticSetup::setDriver(SiVAL::DriverRole role, const std::string &json, int count) {
     std::unique_ptr<RoleConfig> rc = std::make_unique<RoleConfig>(SiVAL::Driver::Factory::create(role, json), count);
     m_drivers[role] = std::move(rc);
+}
+void AcousticSetup::setResponse(SiVAL::ResponseType type, std::unique_ptr<AbstractResponse> response) {
+    m_responses[type] = std::move(response);
 }
 std::string AcousticSetup::toJson() {
     return std::string();

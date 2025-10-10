@@ -27,7 +27,7 @@ add_library(libsival STATIC
   # include/sival/abstractions/groupdelay.hpp         src/abstractions/groupdelay.cpp
   # include/sival/abstractions/impedance.hpp          src/abstractions/impedance.cpp
   # include/sival/abstractions/portair.hpp            src/abstractions/portair.cpp
-  # include/sival/abstractions/response.hpp           src/abstractions/response.cpp
+  include/sival/abstractions/response.hpp           src/abstractions/response.cpp
   # include/sival/abstractions/spl.hpp                src/abstractions/spl.cpp
 
   #utilities
