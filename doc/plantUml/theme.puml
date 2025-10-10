@@ -1,0 +1,48 @@
+' Inhalt für Ihre "mein_theme.puml" Datei
+
+!pragma_inline dot noninteractive
+!define ROUNDED_CORNER 10
+!define COMPONENT_BG_COLOR #F3F3F3
+
+skinparam {
+    ' Globale Einstellungen
+    shadowing true
+    RoundCorner ROUNDED_CORNER
+    HyperlinkColor #2688d4
+    FontName "Segoe UI"
+    FontSize 14
+
+    ' Paket / Namespace-Stil
+    package {
+        BackgroundColor #FFFFFF
+        BorderColor #A8A8A8
+        BorderThickness 1
+    }
+    
+    ' Klassen-Stil
+    class {
+        BackgroundColor #FFFFFF
+        ArrowColor #2688d4
+        BorderColor #2688d4
+        BorderThickness 1
+    }
+
+    ' Stereotyp (z.B. <<static>>)
+    stereotype {
+        FontColor #FFFFFF
+        BackgroundColor #2688d4
+        BorderColor #2688d4
+    }
+
+    ' Pfeile
+    arrow {
+        FontColor #666666
+        Thickness 1
+    }
+    
+    ' Notizen
+    note {
+        BackgroundColor #F3F3F3
+        BorderColor #A8A8A8
+    }
+}

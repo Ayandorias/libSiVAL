@@ -1,0 +1,113 @@
+@startuml
+hide empty members
+left to right direction
+'skinparam classAttributeIconSize 0
+'skinparam linetype ortho
+
+namespace SiVAL {
+    class AcousticSetup {
+        +AcousticSetup()
+    }
+    abstract class AbstractDriver
+    abstract class AbstractEnclosure {
+        +volume()
+        +setVolume()
+        -volume
+    }
+    abstract class AbstractResponse
+    abstract class AbstractImpedance
+    class SIConverter
+    class RoleConfig
+
+    namespace Driver {
+        class Factory {
+            +{static} create();
+        }
+        class LowDriver {
+
+        }
+        class Subwoofer {
+
+        }
+        class Woofer {
+
+        }
+    }
+
+    namespace Enclosure {
+        class Factory {
+            +{static} create();
+        }
+        class Sealed {
+
+        }
+        class Vented {
+
+        }
+    }
+
+    namespace Response {
+        class Factory {
+            +{static} create();
+        }
+        namespace Impedance {
+            class Sealed
+            class Vented
+        }
+
+    }
+
+    enum DriverRole
+    enum ENCLOSURE_TYPE
+    enum RESPONSE_TYPE
+
+' Inheritances
+    SiVAL.Driver.LowDriver --|> AbstractDriver
+    SiVAL.Driver.Woofer --|> SiVAL.Driver.LowDriver
+    SiVAL.Driver.Subwoofer --|> SiVAL.Driver.LowDriver
+
+    SiVAL.Enclosure.Sealed --|> AbstractEnclosure
+    SiVAL.Enclosure.Vented --|> AbstractEnclosure
+
+    SiVAL.Response.Impedance.Sealed --|> AbstractImpedance
+    SiVAL.Response.Impedance.Vented --|> AbstractImpedance
+    AbstractImpedance --|> AbstractResponse
+
+ 
+' Dependencies
+    AcousticSetup ..> SiVAL.Driver.Factory : "uses"
+    AcousticSetup ..> SiVAL.Enclosure.Factory : "uses"
+    AcousticSetup ..> SiVAL.Response.Factory : "uses"
+
+    AbstractDriver ..> SiVAL.SIConverter : "uses"
+    AbstractDriver ..> SiVAL.DriverRole : "uses"
+
+    SiVAL.Enclosure.Factory ..> SiVAL.ENCLOSURE_TYPE : "uses"
+'    AbstractEnclosure ..> SiVAL.ENCLOSURE_TYPE : "uses"
+    
+    SiVAL.RoleConfig ..> AbstractDriver : "uses"
+    
+    AbstractResponse ..> RESPONSE_TYPE : "uses"
+
+' Ownership structure
+    SiVAL.RoleConfig "1" *__ "1" AbstractDriver : "m_driver"
+    
+    AcousticSetup "1" *-- "0..*" SiVAL.RoleConfig : "m_drivers"
+    AcousticSetup "1" *-- "1" SiVAL.AbstractEnclosure : "m_enclosure"
+    AcousticSetup "1" o-- "0..*" SiVAL.AbstractResponse : "m_responses"
+
+' Factory creation dependency
+    SiVAL.Driver.Factory ..> SiVAL.Driver.Subwoofer : "<<creates>>"
+    SiVAL.Driver.Factory ..> SiVAL.Driver.Woofer : "<<creates>>"
+    AcousticSetup ..> SiVAL.RoleConfig : "<<creates>>"
+    
+    SiVAL.Enclosure.Factory ..> SiVAL.Enclosure.Sealed : "<<creates>>"
+    SiVAL.Enclosure.Factory ..> SiVAL.Enclosure.Vented : "<<creates>>"
+    
+    SiVAL.Response.Factory ..> SiVAL.Response.Impedance.Sealed : "<<creates>>"
+    SiVAL.Response.Factory ..> SiVAL.Response.Impedance.Vented : "<<creates>>"
+}
+
+
+
+@enduml
