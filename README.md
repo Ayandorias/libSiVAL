@@ -1,9 +1,9 @@
 # libSiVAL
 
-<img src="resource/sival/logo_big.svg" alt="SiVAL Logo" width="auto" height="150">
+<img src="doc/resource/logo_big.svg" alt="SiVAL Logo" width="auto" height="150">
 
 ![License](https://img.shields.io/badge/License-LGPL_v3-blue.svg)
-![Build Status](https://img.shields.io/github/actions/workflow/status/YourUsername/libsival/cmake.yml)
+![Build Status](https://img.shields.io/github/actions/workflow/status/Ayandorias/libsival/cmake.yml)
 ![Version](https://img.shields.io/badge/Version-0.1--alpha-orange)
 
 A modern, header-driven C++23 library for the electro-acoustic simulation and analysis of loudspeaker systems.
@@ -38,7 +38,7 @@ To get a local copy up and running, follow these simple steps.
 
 1.  Clone the repository:
     ```sh
-    git clone [https://github.com/YourUsername/libsival.git](https://github.com/YourUsername/libsival.git)
+    git clone [https://github.com/Ayandorias/libsival.git](https://github.com/Ayandorias/libsival.git)
     ```
 2.  Navigate to the project directory:
     ```sh
@@ -119,7 +119,7 @@ The current focus is on establishing a stable core for the first release.
 * [ ] Future: Implementation for Vented Enclosures.
 * [ ] Future: Advanced response calculations (Group Delay, Power Compression).
 
-See the [open issues](https://github.com/YourUsername/libsival/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/Ayandorias/libsival/issues) for a full list of proposed features (and known issues).
 
 ## Contributing
 
@@ -136,4 +136,4 @@ Distributed under the GNU Lesser General Public License v3.0. See `LICENSE` for 
 
 Bruno Pierucki - b.pierucki@gmx.de
 
-Project Link: [https://github.com/YourUsername/libsival](https://github.com/YourUsername/libsival)
+Project Link: [https://github.com/Ayandorias/libsival](https://github.com/Ayandorias/libsival)
