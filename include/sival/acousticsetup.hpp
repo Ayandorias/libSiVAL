@@ -9,13 +9,14 @@
  *
  */
 //// begin system includes
-#include <vector>
+#include <nlohmann/json.hpp>
 //// end system includes
 
 //// begin project specific includes
 #include <sival/abstractions/driver.hpp>
 #include <sival/abstractions/enclosure.hpp>
 #include <sival/abstractions/response.hpp>
+#include <sival/core/environment.hpp>
 #include <sival/core/roleconfig.hpp>
 #include <sival/sival.hpp>
 //// end project specific includes
@@ -38,13 +39,14 @@ class AcousticSetup {
 
     //// begin public member methods
 public:
-    AcousticSetup(SiVAL::EnclosureType type);
-    AcousticSetup(const std::string &json);
+    AcousticSetup(std::shared_ptr<SiVAL::Environment> env, SiVAL::EnclosureType type = SiVAL::EnclosureType::Sealed);
+    AcousticSetup(std::shared_ptr<SiVAL::Environment> env, const std::string &json);
     ~AcousticSetup();
     bool addDriver(SiVAL::DriverRole role, const std::string &json, int count);
     bool addResponse(std::unique_ptr<AbstractResponse> response);
     RoleConfig* driverByRole(SiVAL::DriverRole role);
     SiVAL::AbstractEnclosure& enclosure();
+    std::shared_ptr<SiVAL::Environment> environment();
     void removeDriver(SiVAL::DriverRole role);
     void removeResponse(SiVAL::ResponseType type);
     AbstractResponse* responseByType(SiVAL::ResponseType type);
@@ -81,7 +83,9 @@ protected:
 private:
     std::map<DriverRole, std::unique_ptr<RoleConfig>> m_drivers;
     std::unique_ptr<SiVAL::AbstractEnclosure> m_enclosure;
+    std::shared_ptr<SiVAL::Environment> m_environment;
     std::map<ResponseType, std::unique_ptr<AbstractResponse>> m_responses;
+    nlohmann::json m_json;
     //// end private member
 };
 }

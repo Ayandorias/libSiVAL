@@ -150,7 +150,8 @@ enum class EnclosureType {
 };
 
 enum class ErrorCode {
-    OutOfRange
+    OutOfRange,
+    FileAccessError
 };
 
 enum class ResponseType {

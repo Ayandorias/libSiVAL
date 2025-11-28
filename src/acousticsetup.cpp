@@ -36,12 +36,13 @@ namespace SiVAL {
 //// end static functions
 
 //// begin public member methods
-AcousticSetup::AcousticSetup(EnclosureType type) {
-
+AcousticSetup::AcousticSetup(std::shared_ptr<SiVAL::Environment> env, EnclosureType type) {
+    m_environment = env;
     m_enclosure = SiVAL::Enclosure::Factory::create(type);
 }
-AcousticSetup::AcousticSetup(const std::string &json) {
-
+AcousticSetup::AcousticSetup(std::shared_ptr<SiVAL::Environment> env, const std::string &json) {
+    m_environment = env;
+    m_json = nlohmann::json::parse(json);
 }
 AcousticSetup::~AcousticSetup() {
 }
@@ -50,8 +51,12 @@ bool AcousticSetup::addDriver(SiVAL::DriverRole role, const std::string &json, i
     std::pair result = m_drivers.emplace(role, std::move(rc));
     return result.second;
 }
+/**
+*  @todo implement enclosure and environment into response
+*/
 bool AcousticSetup::addResponse(std::unique_ptr<SiVAL::AbstractResponse> response) {
     std::pair result = m_responses.emplace(response->type(), std::move(response));
+
     return result.second;
 }
 RoleConfig* AcousticSetup::driverByRole(SiVAL::DriverRole role) {
@@ -66,6 +71,9 @@ RoleConfig* AcousticSetup::driverByRole(SiVAL::DriverRole role) {
 }
 AbstractEnclosure& AcousticSetup::enclosure() {
     return *m_enclosure;
+}
+std::shared_ptr<SiVAL::Environment> SiVAL::AcousticSetup::environment() {
+    return m_environment;
 }
 void SiVAL::AcousticSetup::removeDriver(SiVAL::DriverRole role) {
     if(m_drivers.erase(role) == 0) {
@@ -96,7 +104,11 @@ void AcousticSetup::setResponse(SiVAL::ResponseType type, std::unique_ptr<Abstra
     m_responses[type] = std::move(response);
 }
 std::string AcousticSetup::toJson() {
-    return std::string();
+    // TODO Hier muss das JSON Object zusammengebaut werden.
+    // Hole Das JSON - String vom Enclosure
+    std::string enc_json = m_enclosure->toJson();
+
+    return to_string(m_json);
 }
 //// end public member methods
 

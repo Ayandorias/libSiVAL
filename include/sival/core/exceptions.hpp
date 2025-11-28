@@ -33,5 +33,12 @@ public:
         : Exception(msg, SiVAL::ErrorCode::OutOfRange) {
     }
 };
+
+class FileAccessError : public Exception {
+public:
+    FileAccessError(const std::string &msg)
+        :Exception(msg, SiVAL::ErrorCode::FileAccessError) {
+    }
+};
 } // namespace Exception
 } // namespace SiVAL
