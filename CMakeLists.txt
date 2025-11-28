@@ -132,6 +132,8 @@ add_library(libsival SHARED
   README.md
 )
 
+set_target_properties(libsival PROPERTIES OUTPUT_NAME "sival")
+
 target_compile_definitions(libsival PRIVATE LIBSIVAL_LIBRARY)
 
 # --- Installations-Anweisungen ---
