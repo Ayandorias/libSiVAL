@@ -83,3 +83,7 @@ install(TARGETS libSiVAL
 install(DIRECTORY include/sival
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
+
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/include/sival/libsival_export.hpp"
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/sival"
+)
