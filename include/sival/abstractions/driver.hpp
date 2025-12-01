@@ -15,7 +15,7 @@
 //// end system includes
 
 //// begin project specific includes
-#include <sival/sival.hpp>
+#include <sival/libsival.hpp>
 //// end project specific includes
 
 //// begin using namespaces

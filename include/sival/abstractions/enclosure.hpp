@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "sival/sival.hpp" // For EnclosureType
+#include "sival/libsival.hpp" // For EnclosureType
 
 namespace SiVAL {
 

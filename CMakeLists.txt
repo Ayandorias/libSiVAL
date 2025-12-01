@@ -10,9 +10,11 @@ include(GNUInstallDirs)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# HIER: 'SHARED' explizit gesetzt. Es entsteht zwingend eine .so Datei.
+# -------------------------------------------------------------------------
+# 1. Bibliothek definieren (Deine Original-Dateiliste)
+# -------------------------------------------------------------------------
 add_library(libSiVAL SHARED
-  include/sival/sival.hpp
+  include/sival/libsival.hpp
   include/sival/acousticsetup.hpp             src/acousticsetup.cpp
   include/sival/abstractions/driver.hpp       src/abstractions/driver.cpp
   include/sival/abstractions/enclosure.hpp    src/abstractions/enclosure.cpp
@@ -23,7 +25,7 @@ add_library(libSiVAL SHARED
   include/sival/utils/siconverter.hpp         src/utils/siconverter.cpp
 
   # Driver
-  include/sival/components/driver/factory.hpp src/components/driver/factory.cpp
+  include/sival/components/driver/factory.hpp   src/components/driver/factory.cpp
   include/sival/components/driver/lowdriver.hpp src/components/driver/lowdriver.cpp
 
   # Enclosure
@@ -36,20 +38,48 @@ add_library(libSiVAL SHARED
   README.md
 )
 
+# -------------------------------------------------------------------------
+# 2. Export-Header generieren (MUSS vor der Nutzung passieren!)
+# -------------------------------------------------------------------------
+include(GenerateExportHeader)
+
+# Erstellt die Datei im Build-Ordner
+generate_export_header(libSiVAL
+    EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/include/sival/libsival_export.hpp"
+    EXPORT_MACRO_NAME SIVAL_API
+)
+
+# -------------------------------------------------------------------------
+# 3. Include-Pfade setzen (Kritischer Schritt)
+# -------------------------------------------------------------------------
+# Damit der Compiler die gerade generierte Datei auch findet.
+target_include_directories(libSiVAL PUBLIC
+    # Dein normaler Source-Code
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+
+    # WICHTIG: Der Ordner im Build-Verzeichnis für die generierten Dateien
+    "${CMAKE_CURRENT_BINARY_DIR}/include"
+)
+
+# -------------------------------------------------------------------------
+# 4. PCH setzen (Nach Generierung und Include-Pfad-Setzung)
+# -------------------------------------------------------------------------
+target_precompile_headers(libSiVAL PRIVATE
+    "${CMAKE_CURRENT_BINARY_DIR}/include/sival/libsival_export.hpp"
+)
+
 set_target_properties(libSiVAL PROPERTIES OUTPUT_NAME "SiVAL")
 
 target_compile_definitions(libSiVAL PRIVATE LIBSIVAL_LIBRARY)
 
 # --- Installations-Anweisungen ---
 
-# 1. Die Bibliothek (.so) in den Systemordner (meist /usr/lib) kopieren
 install(TARGETS libSiVAL
     EXPORT libsivalTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} # Nötig für das Linken unter Linux
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
-# 2. Die Header-Dateien kopieren, damit andere Programme die Lib nutzen können
 install(DIRECTORY include/sival
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )

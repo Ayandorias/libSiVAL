@@ -4,7 +4,7 @@
 #include "sival/abstractions/enclosure.hpp"
 #include "sival/abstractions/driver.hpp"
 #include "sival/core/roleconfig.hpp"
-#include "sival/sival.hpp"
+#include "sival/libsival.hpp"
 
 namespace SiVAL {
 

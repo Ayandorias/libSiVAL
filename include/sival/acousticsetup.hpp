@@ -18,7 +18,7 @@
 #include <sival/abstractions/response.hpp>
 #include <sival/core/environment.hpp>
 #include <sival/core/roleconfig.hpp>
-#include <sival/sival.hpp>
+#include <sival/libsival.hpp>
 //// end project specific includes
 
 //// begin using namespaces

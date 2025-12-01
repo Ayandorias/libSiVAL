@@ -12,7 +12,7 @@
 //// end includes
 
 //// begin system includes
-#include <sival/sival.hpp>
+#include <sival/libsival.hpp>
 //// end system includes
 
 //// begin project specific includes

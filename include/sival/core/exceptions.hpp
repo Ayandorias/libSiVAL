@@ -2,7 +2,7 @@
 
 // #include <stdexcept>
 #include <string>
-#include <sival/sival.hpp>
+#include <sival/libsival.hpp>
 
 namespace SiVAL {
 
