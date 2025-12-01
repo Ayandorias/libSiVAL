@@ -17,7 +17,7 @@ namespace SiVAL {
  * which driver model (`AbstractDriver`) is used and in what quantity (`count`)
  * for a logical position within a system.
  */
-class RoleConfig
+class LIB_SIVAL_EXPORT RoleConfig
 {
 public:
     /**

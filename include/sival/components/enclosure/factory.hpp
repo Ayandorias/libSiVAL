@@ -50,7 +50,7 @@ namespace Enclosure {
  * types can be added by modifying the factory, without requiring changes
  * to the client code that uses it.
  */
-class Factory
+class LIB_SIVAL_EXPORT Factory
 {
 
     //// begin public member methods

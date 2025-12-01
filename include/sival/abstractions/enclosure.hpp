@@ -22,7 +22,7 @@ namespace SiVAL {
  * The constructors are `protected` to ensure they can only be called by
  * derived classes.
  */
-class AbstractEnclosure
+class LIB_SIVAL_EXPORT AbstractEnclosure
 {
 public:
     /**

@@ -44,7 +44,7 @@ namespace SiVAL::Utils {
  * instance. This design choice reflects their nature as pure, stateless functions,
  * eliminating the need to create an object to perform conversions.
  */
-class SIConverter {
+class LIB_SIVAL_EXPORT SIConverter {
 public:
     /**
      * @brief Converts an area value from a specified unit to square meters (m²)   ($$\text{m}^2$$).

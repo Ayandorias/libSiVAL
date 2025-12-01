@@ -46,7 +46,7 @@ include(GenerateExportHeader)
 # Erstellt die Datei im Build-Ordner
 generate_export_header(libSiVAL
     EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/include/sival/libsival_export.hpp"
-    EXPORT_MACRO_NAME SIVAL_API
+    EXPORT_MACRO_NAME LIB_SIVAL_EXPORT
 )
 
 # -------------------------------------------------------------------------

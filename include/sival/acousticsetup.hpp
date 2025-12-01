@@ -35,7 +35,7 @@
 
 namespace SiVAL {
 
-class AcousticSetup {
+class LIB_SIVAL_EXPORT AcousticSetup {
 
     //// begin public member methods
 public:

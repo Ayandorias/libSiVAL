@@ -6,7 +6,7 @@
 
 namespace SiVAL {
 
-class Exception : public std::exception {
+class LIB_SIVAL_EXPORT Exception : public std::exception {
 public:
     const char* what() const noexcept override {
         return m_message.c_str();

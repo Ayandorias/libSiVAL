@@ -190,7 +190,7 @@ namespace SiVAL {
  * | `material`       | Material description.              | `(string)`                      | **(no unit)** | **(string)** |
  *
  */
-class AbstractDriver
+class LIB_SIVAL_EXPORT AbstractDriver
 {
 
     //// begin public member methods

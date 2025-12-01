@@ -22,7 +22,7 @@ namespace SiVAL {
  * calculation logic. They have access to the `protected` members of this base
  * class for their calculations.
  */
-class AbstractResponse
+class LIB_SIVAL_EXPORT AbstractResponse
 {
 public:
     /**

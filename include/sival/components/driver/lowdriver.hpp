@@ -36,7 +36,7 @@ namespace Driver {
  * @brief
  *
  */
-class LowDriver : public SiVAL::AbstractDriver
+class LIB_SIVAL_EXPORT LowDriver : public SiVAL::AbstractDriver
 {
 
     //// begin public member methods

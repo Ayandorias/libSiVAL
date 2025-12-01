@@ -35,7 +35,7 @@ namespace SiVAL::Enclosure {
  * @brief
  *
  */
-class Vented : public AbstractEnclosure
+class LIB_SIVAL_EXPORT Vented : public AbstractEnclosure
 {
 
     //// begin public member methods
